@@ -1,10 +1,28 @@
-import React from 'react'
-import { Navbar } from '../ui/Navbar'
+import React from 'react';
+import { Navbar } from '../ui/Navbar';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+const localizer = momentLocalizer(moment);
+
+const events = [{
+    title: 'Birthday of my commit',
+    start: moment().toDate(),
+    end: moment().add(2, 'hour').toDate(),
+    bgcolor: '#FAFAFA'
+}];
 
 export const CalendarScreen = () => {
     return (
-        <div>
+        <div className="calendar-screen">
             <Navbar />
+            <Calendar
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+            />
         </div>
     )
 }
