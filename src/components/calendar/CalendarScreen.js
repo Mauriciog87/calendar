@@ -10,10 +10,26 @@ const events = [{
     title: 'Birthday of my commit',
     start: moment().toDate(),
     end: moment().add(2, 'hour').toDate(),
-    bgcolor: '#FAFAFA'
+    bgcolor: '#FAFAFA',
+    notes: 'Trying to be better'
 }];
 
 export const CalendarScreen = () => {
+    const eventStyleGetter = (event, start, end, isSelected) => {
+        console.log(event, start, end, isSelected);
+        const style = {
+            backgroundColor: '#367CF7',
+            borderRadius: '0px',
+            opacity: 0.8,
+            display: 'block',
+            color: 'white'
+        }
+
+        return {
+            style
+        }
+    };
+
     return (
         <div className="calendar-screen">
             <Navbar />
@@ -22,7 +38,8 @@ export const CalendarScreen = () => {
                 events={events}
                 startAccessor="start"
                 endAccessor="end"
+                eventPropGetter={eventStyleGetter}
             />
         </div>
-    )
+    );
 }
