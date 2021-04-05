@@ -57,7 +57,6 @@ export const CalendarModal = () => {
                         className="form-control"
                     />
                 </div>
-
                 <div className="form-group">
                     <label>End date</label>
                     <DateTimePicker
@@ -67,7 +66,6 @@ export const CalendarModal = () => {
                         className="form-control"
                     />
                 </div>
-
                 <hr />
                 <div className="form-group">
                     <label>Title and Notes</label>
@@ -80,7 +78,6 @@ export const CalendarModal = () => {
                     />
                     <small id="emailHelp" className="form-text text-muted">A short description</small>
                 </div>
-
                 <div className="form-group">
                     <textarea
                         type="text"
@@ -91,7 +88,6 @@ export const CalendarModal = () => {
                     ></textarea>
                     <small id="emailHelp" className="form-text text-muted">Other information</small>
                 </div>
-
                 <button
                     type="submit"
                     className="btn btn-outline-primary btn-block"
