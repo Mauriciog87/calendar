@@ -22,6 +22,7 @@ const events = [{
 
 export const CalendarScreen = () => {
     const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
+
     const onDoubleClick = (e) => {
 
     }
@@ -36,7 +37,6 @@ export const CalendarScreen = () => {
     }
 
     const eventStyleGetter = (event, start, end, isSelected) => {
-        console.log(event, start, end, isSelected);
         const style = {
             backgroundColor: '#367CF7',
             borderRadius: '0px',
@@ -59,7 +59,7 @@ export const CalendarScreen = () => {
                 startAccessor="start"
                 endAccessor="end"
                 eventPropGetter={eventStyleGetter}
-                onDoubleClickEvent={ondblclick}
+                onDoubleClickEvent={onDoubleClick}
                 onSelectEvent={onSelected}
                 onView={onViewChange}
                 view={lastView}
