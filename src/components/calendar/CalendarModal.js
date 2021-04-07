@@ -5,7 +5,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActiveEvent } from '../../actions/events';
+import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
 
 const customStyles = {
     content: {
@@ -32,13 +32,13 @@ const initEvent = {
 
 export const CalendarModal = () => {
     const dispatch = useDispatch();
-    const {modalOpen} = useSelector(state => state.ui);
-    const {activeEvent} = useSelector(state => state.calendar);
+    const { modalOpen } = useSelector(state => state.ui);
+    const { activeEvent } = useSelector(state => state.calendar);
     const [dateStart, setDateStart] = useState(now.toDate());
     const [dateEnd, setDateEnd] = useState(nowPlusOneHour.toDate());
     const [titleValid, setTitleValid] = useState(true);
     const [formValues, setFormValues] = useState(initEvent);
-    const {notes, title, start, end} = formValues;
+    const { notes, title, start, end } = formValues;
 
     useEffect(() => {
         if (activeEvent) {
@@ -46,7 +46,7 @@ export const CalendarModal = () => {
         }
     }, [activeEvent, setFormValues]);
 
-    const handleInputChange = ({target}) => {
+    const handleInputChange = ({ target }) => {
         setFormValues({
             ...formValues,
             [target.name]: target.value
@@ -78,7 +78,7 @@ export const CalendarModal = () => {
     const handleSubmitForm = (e) => {
         debugger;
         e.preventDefault();
-        
+
         const momentStart = moment(start);
         const momentEnd = moment(end);
 
@@ -90,15 +90,19 @@ export const CalendarModal = () => {
             setTitleValid(false);
         }
 
-        //TODO: send to backend
-        dispatch(eventAddNew({
-            ...formValues,
-            id: new Date().getTime(),
-            user: {
-                _id: '123',
-                name: 'Mauricio'
-            }
-        }));
+        if (activeEvent) {
+            dispatch(eventUpdated(formValues));
+        } else {
+            //TODO: send to backend
+            dispatch(eventAddNew({
+                ...formValues,
+                id: new Date().getTime(),
+                user: {
+                    _id: '123',
+                    name: 'Mauricio'
+                }
+            }));
+        }
 
         setTitleValid(true);
         closeModal();
